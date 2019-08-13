@@ -29,7 +29,7 @@ Note : We are passing the user id and password to docker run command. Modify if 
 --env NEO4J_AUTH=neo4j/test \ 
 ```
 
-    
+## Open Neo4j in browser 
 We can now use neo4j in browser : `http://localhost:7474/browser/`
  
-Default userid/password is neo4j/test, as passed in the `docker run` command.
+Default user id/password is neo4j/test, as passed in the `docker run` command.
