@@ -23,7 +23,7 @@ graph.run("CREATE CONSTRAINT ON (w:WorkType) ASSERT w.name IS UNIQUE;")
 
 def read_data():
     data = pd.read_csv(
-        "/Users/nikki/work/code/knowledge_graph/data_extraction/data/survey_results_public.csv",
+        "./data/survey_results_public.csv",
         low_memory=False)
     print("Column name of data : ", data.columns)
     return data
