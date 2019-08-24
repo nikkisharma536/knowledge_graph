@@ -1,5 +1,5 @@
 import pandas as pd
-from py2neo import Graph, watch
+from py2neo import Graph
 
 
 #####################################################################
@@ -8,10 +8,8 @@ from py2neo import Graph, watch
 
 # Set up a link to the local graph database.
 # Ideally get password from ENV variable
-# graph = Graph(password=getenv("NEO4J_PASSWORD"))
-graph = Graph(password='test')
-
-watch("neo4j.bolt")
+# graph = Graph(getenv("NEO4J_URL"), auth=(getenv("NEO4J_UID"), getenv("NEO4J_PASSWORD")))
+graph = Graph("bolt://127.0.0.1:7687", auth=('neo4j', 'test'))
 
 # Add uniqueness constraints.
 graph.run("CREATE CONSTRAINT ON (p:Person) ASSERT p.uid IS UNIQUE;")
@@ -23,6 +21,7 @@ graph.run("CREATE CONSTRAINT ON (w:WorkType) ASSERT w.name IS UNIQUE;")
 
 def read_data():
     data = pd.read_csv(
+
         "./data/survey_results_public.csv",
         low_memory=False)
     print("Column name of data : ", data.columns)
@@ -96,7 +95,6 @@ def process_dev_data(data):
     del dev_data["level_0"]
     del dev_data["level_1"]
     dev_data = list(dev_data.T.to_dict().values())
-
 
     query = """
            UNWIND {rows} AS row
