@@ -3,7 +3,7 @@
 ## Install Docker
 
 ```
-brew cask install docker
+brew install --cask docker
 ```
 
 Now we can start docker
